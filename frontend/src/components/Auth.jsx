@@ -18,8 +18,8 @@ const Auth = ({ onLogin }) => {
     setError('');
 
     const url = isLogin 
-      ? 'http://localhost:3000/api/auth/login'
-      : 'http://localhost:3000/api/auth/signup';
+      ? `${import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000'}/api/auth/login`
+      : `${import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000'}/api/auth/signup`;
 
     try {
       const response = await fetch(url, {

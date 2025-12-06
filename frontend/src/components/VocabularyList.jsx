@@ -8,7 +8,7 @@ const VocabularyList = ({ token, onClose }) => {
 
   const fetchVocab = async () => {
     try {
-      const response = await fetch('http://localhost:3000/api/vocabulary', {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000'}/api/vocabulary`, {
         headers: { Authorization: `Bearer ${token}` }
       });
       const data = await response.json();
@@ -29,7 +29,7 @@ const VocabularyList = ({ token, onClose }) => {
     if (!newWord.trim()) return;
 
     try {
-      const response = await fetch('http://localhost:3000/api/vocabulary', {
+      const response = await fetch(`${import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000'}/api/vocabulary`, {
         method: 'POST',
         headers: { 
             'Content-Type': 'application/json',
@@ -49,7 +49,7 @@ const VocabularyList = ({ token, onClose }) => {
 
   const handleDelete = async (id) => {
     try {
-      await fetch(`http://localhost:3000/api/vocabulary/${id}`, {
+      await fetch(`${import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000'}/api/vocabulary/${id}`, {
         method: 'DELETE',
         headers: { Authorization: `Bearer ${token}` }
       });

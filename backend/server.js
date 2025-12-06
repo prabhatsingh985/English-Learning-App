@@ -18,14 +18,21 @@ app.use(cors());
 app.use(express.json());
 
 // Connect to MongoDB
-mongoose.connect('mongodb://localhost:27017/EnglishApp')
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/EnglishApp')
 .then(() => console.log('Connected to MongoDB EnglishApp'))
 .catch(err => console.error('MongoDB connection error:', err));
 
 const server = http.createServer(app);
+
+// Allow CORS for both local dev and production
+const allowedOrigins = [
+  "http://localhost:5173",
+  process.env.FRONTEND_URL
+].filter(Boolean);
+
 const io = new Server(server, {
   cors: {
-    origin: "*",
+    origin: allowedOrigins,
     methods: ["GET", "POST"],
   },
 });

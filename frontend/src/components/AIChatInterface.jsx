@@ -69,7 +69,7 @@ const AIChatInterface = ({ onEndSession }) => {
             const token = localStorage.getItem('token');
             const history = messages.map(m => ({ text: m.text, sender: m.sender }));
             
-            const response = await fetch('http://localhost:3000/api/ai/chat', {
+            const response = await fetch(`${import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000'}/api/ai/chat`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

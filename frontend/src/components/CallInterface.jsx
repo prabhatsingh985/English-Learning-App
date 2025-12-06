@@ -9,7 +9,7 @@ const CallInterface = ({ status, onEndCall, socketId, partnerUsername }) => {
 
   const fetchTopic = async () => {
     try {
-        const response = await fetch('http://localhost:3000/api/topics/random');
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000'}/api/topics/random`);
         const data = await response.json();
         setTopic(data);
     } catch (error) {
@@ -36,7 +36,7 @@ const CallInterface = ({ status, onEndCall, socketId, partnerUsername }) => {
 
     try {
         const token = localStorage.getItem('token');
-        const response = await fetch('http://localhost:3000/api/vocabulary', {
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000'}/api/vocabulary`, {
             method: 'POST',
             headers: { 
                 'Content-Type': 'application/json',
