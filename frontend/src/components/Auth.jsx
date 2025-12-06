@@ -8,6 +8,7 @@ const Auth = ({ onLogin }) => {
     password: ''
   });
   const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -16,6 +17,7 @@ const Auth = ({ onLogin }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
+    setSuccessMessage('');
 
     const url = isLogin 
       ? `${import.meta.env.VITE_BACKEND_URL || 'http://localhost:3000'}/api/auth/login`
@@ -38,7 +40,7 @@ const Auth = ({ onLogin }) => {
         onLogin(data);
       } else {
         setIsLogin(true); // Switch to login after signup
-        setError('Signup successful! Please log in.');
+        setSuccessMessage('Signup successful! Please log in.');
       }
     } catch (err) {
       setError(err.message);
@@ -94,6 +96,12 @@ const Auth = ({ onLogin }) => {
             </div>
           )}
 
+          {successMessage && (
+            <div style={{ background: 'rgba(34, 197, 94, 0.2)', color: '#22c55e', padding: '0.8rem', borderRadius: '0.5rem', marginBottom: '1rem', textAlign: 'center' }}>
+              {successMessage}
+            </div>
+          )}
+
           <form onSubmit={handleSubmit}>
             {!isLogin && (
               <input 
@@ -130,7 +138,7 @@ const Auth = ({ onLogin }) => {
           <p style={{ textAlign: 'center', marginTop: '1.5rem', color: '#8b949e' }}>
             {isLogin ? "Don't have an account? " : "Already have an account? "}
             <button 
-              onClick={() => { setIsLogin(!isLogin); setError(''); }} 
+              onClick={() => { setIsLogin(!isLogin); setError(''); setSuccessMessage(''); }} 
               style={{ background: 'none', border: 'none', color: 'var(--primary-color)', cursor: 'pointer', fontSize: '1rem', fontWeight: '600', textDecoration: 'none' }}
             >
               {isLogin ? 'Sign Up' : 'Log In'}
