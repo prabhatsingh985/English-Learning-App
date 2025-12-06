@@ -1,6 +1,7 @@
 :root {
   --bg-color: #0d1117;
   --text-color: #e6edf3;
+  --text-secondary: #9ca3af;
   --primary-color: #7c3aed;
   /* Violet */
   --secondary-color: #2563eb;
@@ -10,6 +11,39 @@
   --glass-bg: rgba(22, 27, 34, 0.7);
   --glass-border: rgba(240, 246, 252, 0.1);
   --font-main: 'Inter', system-ui, Avenir, Helvetica, Arial, sans-serif;
+  /* Badge & Danger */
+  --badge-bg: rgba(124, 58, 237, 0.2);
+  --badge-text: #ddd6fe;
+  --badge-border: rgba(124, 58, 237, 0.3);
+  --danger-bg: rgba(239, 68, 68, 0.2);
+  --danger-text: #fca5a5;
+  --danger-border: rgba(239, 68, 68, 0.3);
+}
+
+[data-theme='light'] {
+  --bg-color: #f0f9ff;
+  --text-color: #1e293b;
+  --text-secondary: #475569;
+  --primary-color: #8b5cf6;
+  --secondary-color: #3b82f6;
+  --glass-bg: rgba(255, 255, 255, 0.85);
+  --glass-border: rgba(0, 0, 0, 0.1);
+
+  /* Lighter Badge, Darker Text */
+  --badge-bg: rgba(139, 92, 246, 0.1);
+  --badge-text: #4c1d95;
+  --badge-border: rgba(139, 92, 246, 0.3);
+
+  /* Danger Button */
+  --danger-bg: rgba(220, 38, 38, 0.1);
+  --danger-text: #b91c1c;
+  --danger-border: rgba(220, 38, 38, 0.5);
+}
+
+[data-theme='light'] h1 {
+  background: linear-gradient(to right, #4f46e5, #be185d);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
 }
 
 body {
@@ -63,8 +97,16 @@ body {
 
 .btn-secondary {
   background: rgba(255, 255, 255, 0.1);
-  color: white;
+  color: var(--text-color);
   backdrop-filter: blur(10px);
+  border: 1px solid transparent;
+}
+
+[data-theme='light'] .btn-secondary {
+  background: rgba(255, 255, 255, 0.6);
+  border-color: var(--glass-border);
+  color: var(--primary-color);
+  font-weight: 700;
 }
 
 .btn-secondary:hover {
@@ -125,7 +167,7 @@ select {
   border: 1px solid var(--glass-border);
   padding: 0.8rem;
   border-radius: 0.5rem;
-  color: white;
+  color: var(--text-color);
   font-size: 1rem;
   width: 100%;
   margin-bottom: 1rem;

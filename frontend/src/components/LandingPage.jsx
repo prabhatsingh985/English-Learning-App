@@ -8,13 +8,13 @@ const LandingPage = ({ onStart, onStartAI, onStartAICall, onCallUser }) => {
       <main style={{ marginTop: '2rem' }}>
         <div style={{ marginBottom: '4rem' }}>
             <span style={{ 
-                background: 'rgba(124, 58, 237, 0.2)', 
-                color: '#ddd6fe', 
+                background: 'var(--badge-bg)', 
+                color: 'var(--badge-text)', 
                 padding: '0.5rem 1rem', 
                 borderRadius: '999px', 
                 fontSize: '0.9rem',
                 fontWeight: '600',
-                border: '1px solid rgba(124, 58, 237, 0.3)'
+                border: '1px solid var(--badge-border)'
             }}>
                 🚀 Level up your English
             </span>
@@ -28,7 +28,7 @@ const LandingPage = ({ onStart, onStartAI, onStartAICall, onCallUser }) => {
                     Real Conversations
                 </span>
             </h1>
-            <p style={{ fontSize: '1.25rem', color: '#9ca3af', maxWidth: '700px', margin: '0 auto 3rem auto', lineHeight: '1.8' }}>
+            <p style={{ fontSize: '1.25rem', color: 'var(--text-secondary)', maxWidth: '700px', margin: '0 auto 3rem auto', lineHeight: '1.8' }}>
             Connect instantly with learners worldwide or practice privately with our advanced AI partner. 
             Speak, listen, and grow your confidence today.
             </p>
@@ -83,17 +83,17 @@ const LandingPage = ({ onStart, onStartAI, onStartAICall, onCallUser }) => {
           <div className="glass-card" style={{ textAlign: 'left' }}>
             <div style={{ fontSize: '2rem', marginBottom: '1rem' }}>⚡</div>
             <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>Instant Match</h3>
-            <p style={{ color: '#9ca3af' }}>No scheduling. Just tap and talk to someone at your level immediately.</p>
+            <p style={{ color: 'var(--text-secondary)' }}>No scheduling. Just tap and talk to someone at your level immediately.</p>
           </div>
           <div className="glass-card" style={{ textAlign: 'left' }}>
             <div style={{ fontSize: '2rem', marginBottom: '1rem' }}>🤖</div>
             <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>AI Phone Call</h3>
-            <p style={{ color: '#9ca3af' }}>Have a realistic voice conversation with our AI. It listens and speaks like a human.</p>
+            <p style={{ color: 'var(--text-secondary)' }}>Have a realistic voice conversation with our AI. It listens and speaks like a human.</p>
           </div>
           <div className="glass-card" style={{ textAlign: 'left' }}>
             <div style={{ fontSize: '2rem', marginBottom: '1rem' }}>📈</div>
             <h3 style={{ fontSize: '1.5rem', marginBottom: '0.5rem' }}>Smart Tracking</h3>
-            <p style={{ color: '#9ca3af' }}>Save vocabulary during your calls and review them anytime to improve fluency.</p>
+            <p style={{ color: 'var(--text-secondary)' }}>Save vocabulary during your calls and review them anytime to improve fluency.</p>
           </div>
         </div>
 
@@ -107,10 +107,10 @@ const LandingPage = ({ onStart, onStartAI, onStartAICall, onCallUser }) => {
                         <div style={{ width: '50px', height: '50px', borderRadius: '50%', background: '#ddd6fe', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem' }}>👩‍🎓</div>
                         <div>
                             <div style={{ fontWeight: 'bold' }}>Sarah Chen</div>
-                            <div style={{ fontSize: '0.8rem', color: '#9ca3af' }}>China 🇨🇳</div>
+                            <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>China 🇨🇳</div>
                         </div>
                     </div>
-                    <p style={{ fontStyle: 'italic', color: '#e2e8f0', lineHeight: '1.6' }}>
+                    <p style={{ fontStyle: 'italic', color: 'var(--text-color)', lineHeight: '1.6' }}>
                         "I was terrified of speaking English. After use SpeakUp for 2 weeks, I can now have full conversations without freezing. The AI tutor is amazing!"
                     </p>
                 </div>
@@ -120,10 +120,10 @@ const LandingPage = ({ onStart, onStartAI, onStartAICall, onCallUser }) => {
                         <div style={{ width: '50px', height: '50px', borderRadius: '50%', background: '#bfdbfe', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem' }}>👨‍💻</div>
                         <div>
                             <div style={{ fontWeight: 'bold' }}>Miguel Rodriguez</div>
-                            <div style={{ fontSize: '0.8rem', color: '#9ca3af' }}>Spain 🇪🇸</div>
+                            <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>Spain 🇪🇸</div>
                         </div>
                     </div>
-                    <p style={{ fontStyle: 'italic', color: '#e2e8f0', lineHeight: '1.6' }}>
+                    <p style={{ fontStyle: 'italic', color: 'var(--text-color)', lineHeight: '1.6' }}>
                         "The random call feature is so fun. I met people from Japan and Brazil today. It's the best way to practice real listening."
                     </p>
                 </div>
@@ -133,10 +133,10 @@ const LandingPage = ({ onStart, onStartAI, onStartAICall, onCallUser }) => {
                         <div style={{ width: '50px', height: '50px', borderRadius: '50%', background: '#bbf7d0', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '1.5rem' }}>🎨</div>
                         <div>
                             <div style={{ fontWeight: 'bold' }}>Yuki Tanaka</div>
-                            <div style={{ fontSize: '0.8rem', color: '#9ca3af' }}>Japan 🇯🇵</div>
+                            <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>Japan 🇯🇵</div>
                         </div>
                     </div>
-                    <p style={{ fontStyle: 'italic', color: '#e2e8f0', lineHeight: '1.6' }}>
+                    <p style={{ fontStyle: 'italic', color: 'var(--text-color)', lineHeight: '1.6' }}>
                         "Finally an app that focuses on SPEAKING. I love saving words during the call to review later. 10/10 would recommend."
                     </p>
                 </div>

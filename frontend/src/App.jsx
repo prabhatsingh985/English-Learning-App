@@ -24,6 +24,18 @@ function App() {
   const peerConnectionRef = useRef(null);
   const audioRef = useRef(new Audio()); 
 
+  // Theme State
+  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'dark');
+
+  useEffect(() => {
+      document.documentElement.setAttribute('data-theme', theme);
+      localStorage.setItem('theme', theme);
+  }, [theme]);
+
+  const toggleTheme = () => {
+      setTheme(prev => prev === 'dark' ? 'light' : 'dark');
+  };
+
   // Direct Calling State
   const [incomingCall, setIncomingCall] = useState(null); // { callerUsername, callerSocketId }
   const [outgoingCallStatus, setOutgoingCallStatus] = useState(null); // 'calling', 'rejected'
@@ -241,7 +253,9 @@ function App() {
         <Navbar 
             username={username} 
             onNavigate={setAppState} 
-            onLogout={handleLogout} 
+            onLogout={handleLogout}
+            currentTheme={theme}
+            onToggleTheme={toggleTheme} 
         />
       )}
 
