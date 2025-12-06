@@ -78,7 +78,8 @@ const CallInterface = ({ status, onEndCall, socketId, partnerUsername }) => {
               🎙️
             </div>
             <h2 style={{ marginBottom: '0.5rem' }}>Finding a speaking partner...</h2>
-            <p style={{ color: '#8b949e' }}>Matching you with someone at your level.</p>
+            <p style={{ color: '#8b949e', marginBottom: '2rem' }}>Matching you with someone at your level.</p>
+            <button onClick={onEndCall} className="btn btn-secondary">Cancel Search</button>
           </div>
         )}
 

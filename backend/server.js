@@ -203,11 +203,82 @@ app.post('/api/ai/chat', async (req, res) => {
 
 // --- Socket.io Logic ---
 let connectedUsers = {}; // socketId -> { id, username, interests }
+let onlineUsers = {}; // username -> socketId (For direct calling lookup)
 let matchingQueue = [];
 let activeCalls = {}; // socketId -> partnerSocketId
 
 io.on("connection", (socket) => {
   console.log(`User connected: ${socket.id}`);
+
+  // 1. Register User (for Direct Calls)
+  socket.on("register_user", (username) => {
+      if (!username) return;
+      const normalizedUsername = username.toLowerCase();
+      onlineUsers[normalizedUsername] = socket.id;
+      console.log(`Registered ${normalizedUsername} (${username}) for direct calls.`);
+  });
+
+  // 2. Direct Call Request
+  socket.on("call_user", ({ targetUsername, callerUsername }) => {
+      console.log(`Call request from ${callerUsername} to ${targetUsername}`);
+      console.log("Current Online Users:", Object.keys(onlineUsers));
+      
+      const normalizedTarget = targetUsername.toLowerCase();
+      const targetSocketId = onlineUsers[normalizedTarget];
+      
+      if (!targetSocketId) {
+          console.log(`Target ${normalizedTarget} not found.`);
+          socket.emit("call_error", { message: `User '${targetUsername}' is offline or not found.` });
+          return;
+      }
+
+      if (activeCalls[targetSocketId] || matchingQueue.find(u => u.id === targetSocketId)) {
+          socket.emit("call_error", { message: "User is currently busy." });
+          return;
+      }
+
+      // Send Signal to Ring
+      io.to(targetSocketId).emit("incoming_call", { 
+          callerUsername, 
+          callerSocketId: socket.id 
+      });
+  });
+
+  // 3. Answer Call
+  socket.on("answer_call", ({ callerSocketId, accepted }) => {
+     if (!accepted) {
+         io.to(callerSocketId).emit("call_rejected");
+         return;
+     }
+
+     // If accepted, treat it like a match found
+     // Partner A = Caller (callerSocketId)
+     // Partner B = Receiver (socket.id)
+     
+     // Register active call
+     activeCalls[socket.id] = callerSocketId;
+     activeCalls[callerSocketId] = socket.id;
+
+     // Get usernames (might need to fetch if not strictly in data, but we passed them)
+     // Ideally we store username in socket object or connectedUsers
+     // For now, allow frontend to pass context or retrieve from our registry if possible.
+     // To keep it simple, we assume frontend handles the 'match_found' event payloads correctly.
+     // But wait, 'match_found' expects specific structure. 
+     // Let's ensure strict sync.
+     
+     io.to(callerSocketId).emit("match_found", { 
+        partnerId: socket.id, 
+        partnerUsername: "Partner", // Simplified or need lookup
+        initiator: true 
+     });
+     
+     io.to(socket.id).emit("match_found", { 
+        partnerId: callerSocketId, 
+        partnerUsername: "Partner", 
+        initiator: false 
+     });
+  });
+
 
   socket.on("join_queue", (data) => {
     // data should ensure it has username
@@ -215,6 +286,7 @@ io.on("connection", (socket) => {
     console.log(`User joined queue: ${user.username} (${socket.id})`);
     
     connectedUsers[socket.id] = user;
+    onlineUsers[user.username] = socket.id; // Also register here just in case
 
     if (matchingQueue.length > 0) {
       const partner = matchingQueue.shift();
@@ -272,7 +344,21 @@ io.on("connection", (socket) => {
     }
     delete activeCalls[socket.id];
 
-    delete connectedUsers[socket.id];
+    // Cleanup Maps
+    const user = connectedUsers[socket.id];
+    if (user) {
+        delete onlineUsers[user.username];
+        delete connectedUsers[socket.id];
+    }
+    
+    // Also scan onlineUsers for this socketId just in case (if registered via register_user but not join_queue)
+    for (const [uname, sid] of Object.entries(onlineUsers)) {
+        if (sid === socket.id) {
+            delete onlineUsers[uname];
+            break;
+        }
+    }
+
     matchingQueue = matchingQueue.filter((u) => u.id !== socket.id);
   });
 });

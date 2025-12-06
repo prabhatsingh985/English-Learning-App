@@ -132,17 +132,19 @@ const AICallInterface = ({ onEndCall }) => {
 
     return (
         <div style={{ 
-            height: '100vh', 
+            minHeight: 'calc(100vh - 80px)', // Adjust for Navbar
+            marginTop: '0', // Navbar is sticky/fixed? Navbar in App is sticky top:0.
             background: 'linear-gradient(135deg, #1e1e24, #2a2a35)', 
             display: 'flex', 
             flexDirection: 'column', 
             alignItems: 'center', 
             justifyContent: 'center',
             color: 'white',
-            position: 'relative'
+            position: 'relative',
+            paddingTop: '2rem' // Add some spacing
         }}>
-            {/* Voice Settings Button */}
-            <div style={{ position: 'absolute', top: '2rem', right: '2rem', zIndex: 10 }}>
+            {/* Voice Settings Button moved down */}
+            <div style={{ position: 'absolute', top: '1rem', right: '2rem', zIndex: 10 }}>
                 <button 
                     onClick={() => setShowVoiceSettings(!showVoiceSettings)}
                     className="btn"

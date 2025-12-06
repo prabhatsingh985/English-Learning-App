@@ -98,7 +98,7 @@ const AIChatInterface = ({ onEndSession }) => {
     };
 
     return (
-        <div className="container" style={{ height: '100vh', display: 'flex', flexDirection: 'column', paddingTop: '1rem', paddingBottom: '1rem' }}>
+        <div className="container" style={{ height: 'calc(100vh - 100px)', display: 'flex', flexDirection: 'column', paddingTop: '1rem', paddingBottom: '1rem' }}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1rem', padding: '0 1rem' }}>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
                     <span style={{ fontSize: '1.5rem' }}>🤖</span>
@@ -146,26 +146,6 @@ const AIChatInterface = ({ onEndSession }) => {
             </div>
 
             <form onSubmit={handleSend} style={{ display: 'flex', gap: '0.5rem', padding: '0 1rem' }}>
-               <button 
-                    type="button"
-                    onClick={toggleListening}
-                    className="btn"
-                    style={{ 
-                        background: isListening ? '#ef4444' : 'rgba(255,255,255,0.1)', 
-                        color: 'white', 
-                        borderRadius: '50%', 
-                        width: '50px', 
-                        height: '50px', 
-                        padding: 0, 
-                        display: 'flex', 
-                        alignItems: 'center', 
-                        justifyContent: 'center',
-                        animation: isListening ? 'pulse 1.5s infinite' : 'none'
-                    }}
-                    title="Speak"
-                >
-                    🎤
-                </button>
                 <input 
                     type="text" 
                     value={input}
