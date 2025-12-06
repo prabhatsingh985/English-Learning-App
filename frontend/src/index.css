@@ -161,6 +161,21 @@ h1 {
   -webkit-text-fill-color: transparent;
 }
 
+.brand-logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  background: linear-gradient(to right, #fff, #bdc8f0);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin: 0;
+}
+
+[data-theme='light'] .brand-logo {
+  background: linear-gradient(to right, #4f46e5, #be185d);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
 input,
 select {
   background: rgba(0, 0, 0, 0.3);

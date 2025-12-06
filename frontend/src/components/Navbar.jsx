@@ -16,19 +16,12 @@ const Navbar = ({ username, onNavigate, onLogout, currentTheme, onToggleTheme })
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
                 <div 
                     onClick={() => { onNavigate('landing'); setIsOpen(false); }} 
+                    className="brand-logo"
                     style={{ 
                         cursor: 'pointer', 
                         display: 'flex', 
                         alignItems: 'center', 
                         gap: '0.5rem',
-                        fontSize: '1.5rem', 
-                        fontWeight: 'bold',
-                        color: currentTheme === 'light' ? '#4f46e5' : 'transparent',
-                        background: currentTheme === 'light' 
-                            ? 'none' 
-                            : 'linear-gradient(to right, #fff, #bdc8f0)',
-                        WebkitBackgroundClip: currentTheme === 'light' ? 'none' : 'text',
-                        WebkitTextFillColor: currentTheme === 'light' ? 'initial' : 'transparent'
                     }}
                 >
                     SpeakUp 🎙️

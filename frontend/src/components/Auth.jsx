@@ -50,7 +50,7 @@ const Auth = ({ onLogin }) => {
   return (
     <div className="container" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
       <nav style={{ padding: '2rem 0', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-        <h2 style={{ fontSize: '1.5rem', fontWeight: 'bold', background: 'linear-gradient(to right, #fff, #bdc8f0)', WebkitBackgroundClip: 'text', WebkitTextFillColor: 'transparent', margin: 0 }}>SpeakUp 🎙️</h2>
+        <h2 className="brand-logo">SpeakUp 🎙️</h2>
       </nav>
 
       <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'space-between', gap: '4rem', paddingBottom: '2rem' }} className="auth-container">
