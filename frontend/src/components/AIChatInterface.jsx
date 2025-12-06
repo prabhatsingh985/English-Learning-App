@@ -125,21 +125,21 @@ const AIChatInterface = ({ onEndSession }) => {
                 {messages.map((msg) => (
                     <div key={msg.id} style={{ alignSelf: msg.sender === 'user' ? 'flex-end' : 'flex-start', maxWidth: '80%' }}>
                         <div style={{ 
-                            background: msg.sender === 'user' ? 'var(--primary-color)' : 'rgba(255,255,255,0.1)', 
-                            color: 'white', 
+                            background: msg.sender === 'user' ? 'var(--primary-color)' : 'var(--glass-bg)', 
+                            color: msg.sender === 'user' ? 'white' : 'var(--text-color)', 
                             padding: '0.8rem 1.2rem', 
                             borderRadius: msg.sender === 'user' ? '1rem 1rem 0 1rem' : '1rem 1rem 1rem 0',
-                            border: msg.sender === 'ai' ? '1px solid rgba(255,255,255,0.1)' : 'none'
+                            border: msg.sender === 'ai' ? '1px solid var(--glass-border)' : 'none'
                         }}>
                             {msg.text}
                         </div>
                     </div>
                 ))}
                 {loading && (
-                    <div style={{ alignSelf: 'flex-start', background: 'rgba(255,255,255,0.1)', padding: '0.8rem 1.2rem', borderRadius: '1rem 1rem 1rem 0' }}>
-                        <span className="pulse-anim" style={{ display: 'inline-block', width: '8px', height: '8px', borderRadius: '50%', background: 'white', marginRight: '4px' }}></span>
-                        <span className="pulse-anim" style={{ display: 'inline-block', width: '8px', height: '8px', borderRadius: '50%', background: 'white', marginRight: '4px', animationDelay: '0.2s' }}></span>
-                        <span className="pulse-anim" style={{ display: 'inline-block', width: '8px', height: '8px', borderRadius: '50%', background: 'white', animationDelay: '0.4s' }}></span>
+                    <div style={{ alignSelf: 'flex-start', background: 'var(--glass-bg)', padding: '0.8rem 1.2rem', borderRadius: '1rem 1rem 1rem 0', border: '1px solid var(--glass-border)' }}>
+                        <span className="pulse-anim" style={{ display: 'inline-block', width: '8px', height: '8px', borderRadius: '50%', background: 'var(--text-color)', marginRight: '4px' }}></span>
+                        <span className="pulse-anim" style={{ display: 'inline-block', width: '8px', height: '8px', borderRadius: '50%', background: 'var(--text-color)', marginRight: '4px', animationDelay: '0.2s' }}></span>
+                        <span className="pulse-anim" style={{ display: 'inline-block', width: '8px', height: '8px', borderRadius: '50%', background: 'var(--text-color)', animationDelay: '0.4s' }}></span>
                     </div>
                 )}
                 <div ref={messagesEndRef} />
@@ -151,7 +151,7 @@ const AIChatInterface = ({ onEndSession }) => {
                     value={input}
                     onChange={(e) => setInput(e.target.value)}
                     placeholder="Type your message..."
-                    style={{ flex: 1, padding: '1rem', borderRadius: '2rem', border: 'none', background: 'rgba(255,255,255,0.1)', color: 'white', outline: 'none' }}
+                    style={{ flex: 1, padding: '1rem', borderRadius: '2rem', border: '1px solid var(--glass-border)', background: 'var(--glass-bg)', color: 'var(--text-color)', outline: 'none' }}
                 />
                 <button 
                     type="submit" 
