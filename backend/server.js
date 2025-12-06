@@ -25,10 +25,13 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/EnglishAp
 const server = http.createServer(app);
 
 // Allow CORS for both local dev and production
+const frontendUrl = process.env.FRONTEND_URL ? process.env.FRONTEND_URL.replace(/\/$/, "") : "";
 const allowedOrigins = [
   "http://localhost:5173",
-  process.env.FRONTEND_URL
+  frontendUrl
 ].filter(Boolean);
+
+console.log("Allowed Origins:", allowedOrigins);
 
 const io = new Server(server, {
   cors: {

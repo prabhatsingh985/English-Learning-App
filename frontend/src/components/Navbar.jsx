@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Navbar = ({ username, onNavigate, onLogout, currentTheme, onToggleTheme }) => {
+const Navbar = ({ username, onNavigate, onLogout, currentTheme, onToggleTheme, isConnected }) => {
     const [isOpen, setIsOpen] = useState(false);
 
     return (
@@ -27,11 +27,23 @@ const Navbar = ({ username, onNavigate, onLogout, currentTheme, onToggleTheme })
                     SpeakUp 🎙️
                 </div>
 
-                {/* Desktop Menu */}
                 <div className="desktop-menu" style={{ display: 'flex', gap: '1rem', alignItems: 'center' }}>
-                    <span style={{ marginRight: '1rem', color: 'var(--text-color)', fontSize: '0.9rem' }}>
-                        Welcome, <span style={{ fontWeight: 'bold' }}>{username}</span>
-                    </span>
+                    <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', marginRight: '1rem' }}>
+                        <div 
+                            style={{ 
+                                width: '10px', 
+                                height: '10px', 
+                                borderRadius: '50%', 
+                                background: isConnected ? '#10b981' : '#ef4444',
+                                boxShadow: isConnected ? '0 0 10px #10b981' : 'none',
+                                transition: 'all 0.3s ease'
+                            }} 
+                            title={isConnected ? "Online" : "Disconnected"}
+                        />
+                        <span style={{ color: 'var(--text-color)', fontSize: '0.9rem' }}>
+                            Welcome, <span style={{ fontWeight: 'bold' }}>{username}</span>
+                        </span>
+                    </div>
                     
                     <button onClick={() => onNavigate('landing')} className="btn btn-secondary" style={{ padding: '0.5rem 1rem', fontSize: '0.9rem' }}>Dashboard</button>
                     <button onClick={() => onNavigate('vocabulary')} className="btn btn-secondary" style={{ padding: '0.5rem 1rem', fontSize: '0.9rem' }}>My Vocabulary</button>

@@ -41,6 +41,8 @@ function App() {
   const [outgoingCallStatus, setOutgoingCallStatus] = useState(null); // 'calling', 'rejected'
   const [targetUser, setTargetUser] = useState(null);
 
+  const [isConnected, setIsConnected] = useState(socket.connected);
+
   useEffect(() => {
     // If we have a token/username, connect to socket immediately for receiving calls
     if (token && username) {
@@ -52,10 +54,19 @@ function App() {
         }
     }
 
-    socket.on('connect', () => {
+    const onConnect = () => {
       console.log('Connected to socket server');
+      setIsConnected(true);
       if (username) socket.emit('register_user', username);
-    });
+    };
+
+    const onDisconnect = () => {
+      console.log('Disconnected from socket server');
+      setIsConnected(false);
+    };
+
+    socket.on('connect', onConnect);
+    socket.on('disconnect', onDisconnect);
 
     socket.on('match_found', async ({ partnerId, partnerUsername, initiator }) => {
       console.log('Match found!', partnerId, partnerUsername);
@@ -256,6 +267,7 @@ function App() {
             onLogout={handleLogout}
             currentTheme={theme}
             onToggleTheme={toggleTheme} 
+            isConnected={isConnected}
         />
       )}
 
